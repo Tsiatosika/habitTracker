@@ -1,0 +1,33 @@
+.progress-charts {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.progress-charts h2 {
+    margin: 0 0 24px 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.chart-container {
+    margin-bottom: 40px;
+}
+
+.chart-container:last-child {
+    margin-bottom: 0;
+}
+
+.chart-container h3 {
+    margin: 0 0 16px 0;
+    font-size: 16px;
+    color: #666;
+}
+
+@media (max-width: 768px) {
+    .progress-charts {
+        padding: 16px;
+    }
+}

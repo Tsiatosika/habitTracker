@@ -1,0 +1,140 @@
+.heatmap-container {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.heatmap-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.heatmap-header h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.heatmap-stats {
+    display: flex;
+    gap: 20px;
+    font-size: 14px;
+    color: #666;
+}
+
+.heatmap-months {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 4px;
+    margin-bottom: 8px;
+    padding-left: 40px;
+}
+
+.month-label {
+    font-size: 12px;
+    color: #666;
+    text-align: left;
+}
+
+.heatmap-grid {
+    display: flex;
+    gap: 10px;
+}
+
+.weekday-labels {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 8px 0;
+    font-size: 12px;
+    color: #666;
+    width: 30px;
+}
+
+.heatmap-weeks {
+    display: flex;
+    gap: 3px;
+    flex: 1;
+    overflow-x: auto;
+}
+
+.heatmap-week {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.heatmap-day {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.heatmap-day:hover {
+    transform: scale(1.5);
+    border: 1px solid #333;
+}
+
+.intensity-0 {
+    background: #ebedf0;
+}
+
+.intensity-1 {
+    background: #c6e48b;
+}
+
+.intensity-2 {
+    background: #7bc96f;
+}
+
+.intensity-3 {
+    background: #239a3b;
+}
+
+.intensity-4 {
+    background: #196127;
+}
+
+.heatmap-legend {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 12px;
+    font-size: 12px;
+    color: #666;
+}
+
+.legend-boxes {
+    display: flex;
+    gap: 3px;
+}
+
+.legend-box {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+    .heatmap-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .heatmap-stats {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .heatmap-day {
+        width: 10px;
+        height: 10px;
+    }
+}

@@ -1,0 +1,245 @@
+/* Animation de base pour tous les skeletons */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.skeleton-container {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Classe de base pour tous les éléments skeleton */
+.skeleton-text,
+.skeleton-circle,
+.skeleton-rectangle,
+.skeleton-icon,
+.skeleton-title,
+.skeleton-button,
+.skeleton-description,
+.skeleton-stat,
+.skeleton-stat-number,
+.skeleton-stat-label,
+.skeleton-badge-icon,
+.skeleton-badge-name,
+.skeleton-badge-desc,
+.skeleton-calendar-day,
+.skeleton-month-title,
+.skeleton-title-large {
+    background: linear-gradient(
+        90deg,
+        #f0f0f0 0%,
+        #e0e0e0 20%,
+        #f0f0f0 40%,
+        #f0f0f0 100%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 1.5s infinite linear;
+    border-radius: 8px;
+}
+
+/* HabitCard Skeleton */
+.habit-card-skeleton {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.skeleton-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    gap: 12px;
+}
+
+.skeleton-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.skeleton-title {
+    flex: 1;
+    height: 20px;
+    max-width: 200px;
+}
+
+.skeleton-button {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+
+.skeleton-description {
+    height: 14px;
+    margin-bottom: 8px;
+}
+
+.skeleton-description.short {
+    width: 70%;
+    margin-bottom: 16px;
+}
+
+.skeleton-stats {
+    display: flex;
+    gap: 20px;
+    padding: 16px;
+    background: #f8f9fa;
+    border-radius: 12px;
+}
+
+.skeleton-stat {
+    height: 20px;
+    width: 80px;
+}
+
+/* StatCard Skeleton */
+.stat-card-skeleton {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.skeleton-stat-number {
+    height: 42px;
+    width: 60px;
+    margin-bottom: 8px;
+}
+
+.skeleton-stat-label {
+    height: 14px;
+    width: 100px;
+}
+
+/* Dashboard Skeleton */
+.dashboard-skeleton {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 24px;
+}
+
+.skeleton-title-large {
+    height: 36px;
+    width: 250px;
+    margin-bottom: 30px;
+}
+
+/* Badge Skeleton */
+.badge-skeleton {
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.skeleton-badge-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+}
+
+.skeleton-badge-name {
+    height: 20px;
+    width: 120px;
+}
+
+.skeleton-badge-desc {
+    height: 14px;
+    width: 160px;
+}
+
+/* Calendar Skeleton */
+.calendar-skeleton {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.skeleton-calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.skeleton-month-title {
+    height: 24px;
+    width: 150px;
+}
+
+.skeleton-calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+}
+
+.skeleton-calendar-day {
+    aspect-ratio: 1;
+    border-radius: 10px;
+}
+
+/* Skeletons génériques */
+.skeleton-text {
+    display: inline-block;
+    height: 16px;
+    width: 100%;
+}
+
+.skeleton-circle {
+    border-radius: 50%;
+}
+
+.skeleton-rectangle {
+    border-radius: 8px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dashboard-skeleton {
+        padding: 24px 16px;
+    }
+
+    .habit-card-skeleton {
+        padding: 20px;
+    }
+
+    .badge-skeleton {
+        padding: 20px;
+    }
+
+    .skeleton-badge-icon {
+        width: 56px;
+        height: 56px;
+    }
+
+    .skeleton-title-large {
+        height: 28px;
+        width: 200px;
+    }
+}

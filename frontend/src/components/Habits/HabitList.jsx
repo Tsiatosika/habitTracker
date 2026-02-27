@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { habitService } from '../../services/habitService';
 import Modal from '../common/Modal';
 import HabitForm from './HabitForm';
+import HabitDetailModal from './HabitDetailModal';
 import './HabitList.css';
 
 const HabitList = () => {
@@ -10,6 +11,7 @@ const HabitList = () => {
     const [loading, setLoading] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingHabit, setEditingHabit] = useState(null);
+    const [selectedHabitId, setSelectedHabitId] = useState(null);
 
     useEffect(() => {
         loadHabits();
@@ -68,6 +70,14 @@ const HabitList = () => {
     const closeModal = () => {
         setIsModalOpen(false);
         setEditingHabit(null);
+    };
+
+    const openDetailModal = (habitId) => {
+        setSelectedHabitId(habitId);
+    };
+
+    const closeDetailModal = () => {
+        setSelectedHabitId(null);
     };
 
     if (loading) return <div className="loading">Chargement...</div>;
@@ -135,18 +145,29 @@ const HabitList = () => {
                                 <span className="habit-frequency">
                                     {habit.frequency === 'daily' ? '📅 Quotidienne' : `📆 ${habit.target_days}x/semaine`}
                                 </span>
-                                <Link
+
+                                {/* Option 1 : Quick view avec modal */}
+                                <button
+                                    className="btn-view-details"
+                                    onClick={() => openDetailModal(habit.id)}
+                                >
+                                    Voir les détails →
+                                </button>
+
+                                {/* Option 2 : Navigation vers page complète */}
+                                {/* <Link
                                     to={`/habits/${habit.id}`}
                                     className="btn-view-details"
                                 >
-                                    Voir les détails →
-                                </Link>
+                                    Vue complète →
+                                </Link> */}
                             </div>
                         </div>
                     ))}
                 </div>
             )}
 
+            {/* Modal pour créer/modifier */}
             <Modal
                 isOpen={isModalOpen}
                 onClose={closeModal}
@@ -158,6 +179,13 @@ const HabitList = () => {
                     initialData={editingHabit}
                 />
             </Modal>
+
+            {/* Modal pour les détails */}
+            <HabitDetailModal
+                isOpen={!!selectedHabitId}
+                onClose={closeDetailModal}
+                habitId={selectedHabitId}
+            />
         </div>
     );
 };

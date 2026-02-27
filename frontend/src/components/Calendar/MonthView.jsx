@@ -3,24 +3,57 @@ import { habitService } from '../../services/habitService';
 import './MonthView.css';
 
 const MonthView = ({ habit }) => {
-    const [monthChecks, setMonthChecks] = useState([]);
-    const [currentMonth, setCurrentMonth] = useState(new Date());
+    const [monthData, setMonthData] = useState([]);
+    const [currentDate, setCurrentDate] = useState(new Date());
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         loadMonthData();
-    }, [habit.id, currentMonth]);
+    }, [habit.id, currentDate]);
 
     const loadMonthData = async () => {
         try {
-            const year = currentMonth.getFullYear();
-            const month = currentMonth.getMonth();
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
 
-            const startDate = new Date(year, month, 1).toISOString().split('T')[0];
-            const endDate = new Date(year, month + 1, 0).toISOString().split('T')[0];
+            // Premier et dernier jour du mois
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
 
-            const checks = await habitService.getChecks(habit.id, startDate, endDate);
-            setMonthChecks(checks);
+            const checks = await habitService.getChecks(
+                habit.id,
+                firstDay.toISOString().split('T')[0],
+                lastDay.toISOString().split('T')[0]
+            );
+
+            // Créer la grille du calendrier
+            const daysInMonth = lastDay.getDate();
+            const startDayOfWeek = firstDay.getDay() === 0 ? 6 : firstDay.getDay() - 1; // Lundi = 0
+
+            const days = [];
+
+            // Ajouter les jours vides au début
+            for (let i = 0; i < startDayOfWeek; i++) {
+                days.push({ isEmpty: true });
+            }
+
+            // Ajouter tous les jours du mois
+            for (let day = 1; day <= daysInMonth; day++) {
+                const date = new Date(year, month, day);
+                const dateStr = date.toISOString().split('T')[0];
+                const check = checks.find(c => c.check_date === dateStr);
+                const today = new Date().toISOString().split('T')[0];
+
+                days.push({
+                    date: dateStr,
+                    dayNumber: day,
+                    isCompleted: check ? check.completed : false,
+                    isToday: dateStr === today,
+                    isFuture: date > new Date()
+                });
+            }
+
+            setMonthData(days);
         } catch (error) {
             console.error('Error loading month data:', error);
         } finally {
@@ -28,107 +61,107 @@ const MonthView = ({ habit }) => {
         }
     };
 
-    const getDaysInMonth = () => {
-        const year = currentMonth.getFullYear();
-        const month = currentMonth.getMonth();
-        const firstDay = new Date(year, month, 1);
-        const lastDay = new Date(year, month + 1, 0);
+    const handleToggleDay = async (dateStr) => {
+        const day = monthData.find(d => d.date === dateStr);
+        if (!day || day.isFuture || day.isEmpty) return;
 
-        const days = [];
-        const startDayOfWeek = firstDay.getDay();
+        try {
+            await habitService.toggleCheck({
+                habit_id: habit.id,
+                check_date: dateStr,
+                completed: !day.isCompleted
+            });
 
-        // Ajouter les jours vides au début
-        for (let i = 0; i < startDayOfWeek; i++) {
-            days.push(null);
+            loadMonthData();
+        } catch (error) {
+            console.error('Error toggling day:', error);
         }
-
-        // Ajouter tous les jours du mois
-        for (let day = 1; day <= lastDay.getDate(); day++) {
-            days.push(new Date(year, month, day));
-        }
-
-        return days;
     };
 
-    const isChecked = (date) => {
-        if (!date) return false;
-        const dateStr = date.toISOString().split('T')[0];
-        return monthChecks.some(
-            check => check.check_date === dateStr && check.completed
-        );
+    const goToPreviousMonth = () => {
+        setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
     };
 
-    const isToday = (date) => {
-        if (!date) return false;
-        const today = new Date();
-        return date.toDateString() === today.toDateString();
+    const goToNextMonth = () => {
+        setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
     };
 
-    const previousMonth = () => {
-        setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1));
-    };
-
-    const nextMonth = () => {
-        setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1));
-    };
-
-    const goToToday = () => {
-        setCurrentMonth(new Date());
+    const goToCurrentMonth = () => {
+        setCurrentDate(new Date());
     };
 
     if (loading) return <div className="loading">Chargement...</div>;
 
-    const days = getDaysInMonth();
-    const monthName = currentMonth.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
-    const weekDays = ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'];
+    const monthName = currentDate.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
+    const completedDays = monthData.filter(d => !d.isEmpty && d.isCompleted).length;
+    const totalDays = monthData.filter(d => !d.isEmpty && !d.isFuture).length;
+    const completionRate = totalDays > 0 ? ((completedDays / totalDays) * 100).toFixed(0) : 0;
+
+    const weekDays = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
 
     return (
         <div className="month-view">
             <div className="month-header">
-                <button onClick={previousMonth} className="nav-btn">←</button>
-                <div className="month-title">
-                    <h3>{monthName}</h3>
-                    <button onClick={goToToday} className="today-btn">Aujourd'hui</button>
+                <button className="btn-nav" onClick={goToPreviousMonth}>
+                    ← Mois précédent
+                </button>
+                <div className="month-title-section">
+                    <h3 className="month-title">{monthName}</h3>
+                    <button className="btn-today-small" onClick={goToCurrentMonth}>
+                        Ce mois
+                    </button>
                 </div>
-                <button onClick={nextMonth} className="nav-btn">→</button>
-            </div>
-
-            <div className="calendar-grid">
-                {weekDays.map(day => (
-                    <div key={day} className="calendar-weekday">
-                        {day}
-                    </div>
-                ))}
-
-                {days.map((date, index) => (
-                    <div
-                        key={index}
-                        className={`calendar-day ${!date ? 'empty' : ''} ${isChecked(date) ? 'checked' : ''} ${isToday(date) ? 'today' : ''}`}
-                    >
-                        {date && (
-                            <>
-                                <span className="day-number">{date.getDate()}</span>
-                                {isChecked(date) && <span className="check-icon">✓</span>}
-                            </>
-                        )}
-                    </div>
-                ))}
+                <button className="btn-nav" onClick={goToNextMonth}>
+                    Mois suivant →
+                </button>
             </div>
 
             <div className="month-stats">
-                <div className="stat">
-                    <span className="stat-label">Jours complétés</span>
-                    <span className="stat-value">
-                        {monthChecks.filter(c => c.completed).length}
-                    </span>
+                <div className="month-completion">
+                    <span className="completion-number">{completedDays}/{totalDays}</span>
+                    <span className="completion-label">jours complétés</span>
                 </div>
-                <div className="stat">
-                    <span className="stat-label">Taux de réussite</span>
-                    <span className="stat-value">
-                        {monthChecks.length > 0
-                            ? Math.round((monthChecks.filter(c => c.completed).length / days.filter(d => d).length) * 100)
-                            : 0}%
-                    </span>
+                <div className="month-progress-bar">
+                    <div
+                        className="month-progress-fill"
+                        style={{
+                            width: `${completionRate}%`,
+                            backgroundColor: habit.color
+                        }}
+                    ></div>
+                </div>
+                <span className="completion-percentage">{completionRate}%</span>
+            </div>
+
+            <div className="calendar-grid">
+                <div className="weekday-headers">
+                    {weekDays.map(day => (
+                        <div key={day} className="weekday-header">{day}</div>
+                    ))}
+                </div>
+
+                <div className="days-grid">
+                    {monthData.map((day, index) => (
+                        <div
+                            key={index}
+                            className={`calendar-day ${day.isEmpty ? 'empty' : ''} ${day.isCompleted ? 'completed' : ''} ${day.isToday ? 'today' : ''} ${day.isFuture ? 'future' : ''}`}
+                            onClick={() => !day.isEmpty && handleToggleDay(day.date)}
+                            style={{
+                                borderColor: day.isCompleted ? habit.color : undefined,
+                                backgroundColor: day.isCompleted ? `${habit.color}15` : undefined
+                            }}
+                        >
+                            {!day.isEmpty && (
+                                <>
+                                    <span className="day-number">{day.dayNumber}</span>
+                                    {day.isCompleted && (
+                                        <span className="check-mark" style={{ color: habit.color }}>✓</span>
+                                    )}
+                                    {day.isToday && <div className="today-dot"></div>}
+                                </>
+                            )}
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>

@@ -20,7 +20,7 @@ const Dashboard = () => {
                 habitService.getAll(),
                 habitService.getOverallStats()
             ]);
-            
+
             setHabits(habitsData);
             setStats(statsData);
         } catch (error) {
@@ -37,7 +37,7 @@ const Dashboard = () => {
                 check_date: today,
                 completed: !isChecked
             });
-            
+
             loadData(); // Recharger les données
         } catch (error) {
             console.error('Error toggling check:', error);

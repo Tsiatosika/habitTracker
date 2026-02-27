@@ -1,43 +1,84 @@
 .quick-check {
     background: white;
-    border-radius: 12px;
-    padding: 24px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.quick-check::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
 }
 
 .quick-check-header {
-    margin-bottom: 20px;
+    margin-bottom: 24px;
 }
 
 .quick-check-header h2 {
-    margin: 0 0 16px 0;
-    font-size: 22px;
-    color: #333;
+    margin: 0 0 20px 0;
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a1a1a;
 }
 
 .progress-info {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
 }
 
 .progress-info > span {
-    font-size: 14px;
-    color: #666;
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
 }
 
 .progress-bar {
     width: 100%;
-    height: 8px;
+    height: 12px;
     background: #f0f0f0;
-    border-radius: 4px;
+    border-radius: 8px;
     overflow: hidden;
+    position: relative;
 }
 
 .progress-fill {
     height: 100%;
     background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-    transition: width 0.5s ease;
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.3) 50%,
+            rgba(255, 255, 255, 0) 100%
+    );
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
 }
 
 .quick-check-list {
@@ -50,9 +91,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px;
+    padding: 18px 20px;
     background: #f9f9f9;
-    border-radius: 8px;
+    border-radius: 12px;
     cursor: pointer;
     transition: all 0.3s;
     border-left: 4px solid transparent;
@@ -64,66 +105,76 @@
 }
 
 .quick-check-item.checked {
-    background: #d4edda;
+    background: linear-gradient(90deg, #d4edda 0%, #c3e6cb 100%);
     border-left-color: #28a745;
+}
+
+.quick-check-item.checked:hover {
+    background: linear-gradient(90deg, #c3e6cb 0%, #b1dfbb 100%);
 }
 
 .habit-info {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 16px;
 }
 
 .habit-color-indicator {
     width: 4px;
-    height: 30px;
+    height: 36px;
     border-radius: 2px;
+    flex-shrink: 0;
 }
 
 .habit-icon {
-    font-size: 24px;
+    font-size: 28px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
 .habit-name {
     font-size: 16px;
-    font-weight: 500;
-    color: #333;
+    font-weight: 600;
+    color: #1a1a1a;
 }
 
 .check-box {
-    width: 28px;
-    height: 28px;
-    border: 2px solid #ddd;
-    border-radius: 6px;
+    width: 32px;
+    height: 32px;
+    border: 2.5px solid #ddd;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
+    font-size: 18px;
     transition: all 0.3s;
+    flex-shrink: 0;
 }
 
 .check-box.checked {
     background: #28a745;
     border-color: #28a745;
     color: white;
+    transform: scale(1.1);
 }
 
 .no-habits-message {
     text-align: center;
     color: #999;
-    padding: 40px 20px;
-    font-size: 14px;
+    padding: 60px 20px;
+    font-size: 15px;
 }
 
 .celebration-message {
-    margin-top: 20px;
-    padding: 16px;
+    margin-top: 24px;
+    padding: 20px;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    border-radius: 8px;
+    border-radius: 12px;
     text-align: center;
     font-weight: 600;
-    animation: celebrate 0.5s ease-out;
+    font-size: 16px;
+    animation: celebrate 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
 @keyframes celebrate {
@@ -137,5 +188,37 @@
     100% {
         transform: scale(1);
         opacity: 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .quick-check {
+        padding: 24px 20px;
+    }
+
+    .quick-check-header h2 {
+        font-size: 20px;
+    }
+
+    .quick-check-item {
+        padding: 16px;
+    }
+
+    .habit-info {
+        gap: 12px;
+    }
+
+    .habit-icon {
+        font-size: 24px;
+    }
+
+    .habit-name {
+        font-size: 15px;
+    }
+
+    .check-box {
+        width: 28px;
+        height: 28px;
+        font-size: 16px;
     }
 }

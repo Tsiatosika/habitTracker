@@ -14,7 +14,7 @@ import Signup from './components/Auth/Signup';
 import Dashboard from './components/Dashboard/Dashboard';
 import HabitList from './components/Habits/HabitList';
 import HabitDetail from './components/Habits/HabitDetail';
-import StatsOverview from './components/Stats/StatsOverview';
+import Statistics from './components/Stats/Statistics';
 import BadgeList from './components/Badges/BadgeList';
 import ModernQuickCheck from './components/Dashboard/ModernQuickCheck';
 
@@ -87,12 +87,16 @@ function App() {
                                             }
                                         />
                                         <Route
-                                            path="/stats"
+                                            path="/statistics"
                                             element={
                                                 <PrivateRoute>
-                                                    <StatsOverview />
+                                                    <Statistics />
                                                 </PrivateRoute>
                                             }
+                                        />
+                                        <Route
+                                            path="/stats"
+                                            element={<Navigate to="/statistics" replace />}
                                         />
                                         <Route
                                             path="/badges"

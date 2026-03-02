@@ -17,6 +17,8 @@ import HabitDetail from './components/Habits/HabitDetail';
 import Statistics from './components/Stats/Statistics';
 import BadgeList from './components/Badges/BadgeList';
 import ModernQuickCheck from './components/Dashboard/ModernQuickCheck';
+import Profile from './components/Profile/Profile';
+import Settings from './components/Profile/Settings';
 
 // Composants communs
 import Navbar from './components/common/Navbar';
@@ -103,6 +105,22 @@ function App() {
                                             element={
                                                 <PrivateRoute>
                                                     <BadgeList />
+                                                </PrivateRoute>
+                                            }
+                                        />
+                                        <Route
+                                            path="/profile"
+                                            element={
+                                                <PrivateRoute>
+                                                    <Profile />
+                                                </PrivateRoute>
+                                            }
+                                        />
+                                        <Route
+                                            path="/settings"
+                                            element={
+                                                <PrivateRoute>
+                                                    <Settings />
                                                 </PrivateRoute>
                                             }
                                         />

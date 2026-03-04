@@ -587,15 +587,10 @@
     }
 }
 
-/* Dark mode (si besoin) */
-[data-theme="dark"] .modern-habit-item {
-    background: rgba(30, 30, 30, 0.9);
-}
 
-[data-theme="dark"] .habit-name-quick {
-    color: #f1f1f1;
-}
-
-[data-theme="dark"] .habit-desc-quick {
-    color: #ccc;
+/* Transitions pour le dark mode */
+.modern-habit-item,
+.timeline-widget,
+.empty-state-quick {
+    transition: background 0.3s ease, box-shadow 0.3s ease;
 }

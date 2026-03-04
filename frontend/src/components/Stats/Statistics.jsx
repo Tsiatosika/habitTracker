@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { habitService } from '../../services/habitService';
 import { GamificationContext } from '../../context/GamificationContext';
+import { ThemeContext } from '../../context/ThemeContext';
 import './Statistics.css';
 
 const Statistics = () => {
@@ -14,6 +15,14 @@ const Statistics = () => {
     const [categoryData, setCategoryData] = useState([]);
 
     const { userLevel, totalPoints } = useContext(GamificationContext);
+    const { mode } = useContext(ThemeContext);
+
+    const dark = mode === 'dark';
+    const gridColor   = dark ? '#334155' : '#e0e0e0';
+    const axisColor   = dark ? '#94a3b8' : '#666';
+    const tooltipStyle = dark
+        ? { background: '#1e293b', border: '1px solid #334155', borderRadius: '8px', color: '#f1f5f9' }
+        : { background: 'white',   border: '1px solid #e0e0e0', borderRadius: '8px' };
 
     useEffect(() => {
         loadData();
@@ -281,23 +290,10 @@ const Statistics = () => {
                     <h3>📈 Progression dans le temps</h3>
                     <ResponsiveContainer width="100%" height={300}>
                         <LineChart data={chartData}>
-                            <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
-                            <XAxis
-                                dataKey="date"
-                                style={{ fontSize: '12px' }}
-                                stroke="#666"
-                            />
-                            <YAxis
-                                style={{ fontSize: '12px' }}
-                                stroke="#666"
-                            />
-                            <Tooltip
-                                contentStyle={{
-                                    background: 'white',
-                                    border: '1px solid #e0e0e0',
-                                    borderRadius: '8px'
-                                }}
-                            />
+                            <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
+                            <XAxis dataKey="date" style={{ fontSize: '12px' }} stroke={axisColor} tick={{ fill: axisColor }} />
+                            <YAxis style={{ fontSize: '12px' }} stroke={axisColor} tick={{ fill: axisColor }} />
+                            <Tooltip contentStyle={tooltipStyle} />
                             <Legend />
                             <Line
                                 type="monotone"
@@ -322,30 +318,12 @@ const Statistics = () => {
                     <h3>📊 Taux de complétion</h3>
                     <ResponsiveContainer width="100%" height={300}>
                         <BarChart data={chartData}>
-                            <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
-                            <XAxis
-                                dataKey="date"
-                                style={{ fontSize: '12px' }}
-                                stroke="#666"
-                            />
-                            <YAxis
-                                style={{ fontSize: '12px' }}
-                                stroke="#666"
-                            />
-                            <Tooltip
-                                contentStyle={{
-                                    background: 'white',
-                                    border: '1px solid #e0e0e0',
-                                    borderRadius: '8px'
-                                }}
-                            />
+                            <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
+                            <XAxis dataKey="date" style={{ fontSize: '12px' }} stroke={axisColor} tick={{ fill: axisColor }} />
+                            <YAxis style={{ fontSize: '12px' }} stroke={axisColor} tick={{ fill: axisColor }} />
+                            <Tooltip contentStyle={tooltipStyle} />
                             <Legend />
-                            <Bar
-                                dataKey="percentage"
-                                fill="#10b981"
-                                name="Taux de complétion (%)"
-                                radius={[8, 8, 0, 0]}
-                            />
+                            <Bar dataKey="percentage" fill="#10b981" name="Taux de complétion (%)" radius={[8, 8, 0, 0]} />
                         </BarChart>
                     </ResponsiveContainer>
                 </motion.div>
@@ -375,7 +353,7 @@ const Statistics = () => {
                                         <Cell key={`cell-${index}`} fill={entry.color} />
                                     ))}
                                 </Pie>
-                                <Tooltip />
+                                <Tooltip contentStyle={tooltipStyle} />
                             </PieChart>
                         </ResponsiveContainer>
                     </motion.div>

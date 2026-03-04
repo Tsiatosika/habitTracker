@@ -1,0 +1,356 @@
+/* ════════════════════════════════════════════════════════
+   DARK MODE GLOBAL
+   Appliqué via la classe .dark sur <html>
+   Couvre : Navbar, Profile, Settings, Dashboard, etc.
+════════════════════════════════════════════════════════ */
+
+/* ─── Base ─── */
+html.dark,
+html.dark body {
+    background-color: #0f172a;
+    color: #f1f5f9;
+}
+
+/* ─── Navbar ─── */
+html.dark .navbar {
+    background: #1e293b;
+    border-bottom-color: #334155;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+html.dark .navbar-brand {
+    color: #f1f5f9;
+}
+
+html.dark .nav-link {
+    color: #94a3b8;
+}
+
+html.dark .nav-link:hover {
+    background: #334155;
+    color: #818cf8;
+}
+
+html.dark .nav-link.active {
+    background: linear-gradient(135deg, #818cf8 0%, #a78bfa 100%);
+    color: white;
+}
+
+html.dark .user-button {
+    background: #334155;
+    border-color: #475569;
+    color: #f1f5f9;
+}
+
+html.dark .user-button:hover {
+    border-color: #818cf8;
+    background: #3d4f6a;
+}
+
+html.dark .user-dropdown {
+    background: #1e293b;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+html.dark .dropdown-divider {
+    background: #334155;
+}
+
+html.dark .dropdown-item {
+    color: #cbd5e1;
+}
+
+html.dark .dropdown-item:hover {
+    background: #334155;
+    color: #818cf8;
+}
+
+html.dark .dropdown-item.logout:hover {
+    background: #3d1f1f;
+}
+
+html.dark .user-name-large {
+    color: #f1f5f9;
+}
+
+html.dark .mobile-nav {
+    background: #1e293b;
+    border-top-color: #334155;
+}
+
+html.dark .mobile-nav-link {
+    color: #94a3b8;
+}
+
+html.dark .mobile-nav-link:hover {
+    background: #334155;
+    color: #818cf8;
+}
+
+html.dark .mobile-nav-link.active {
+    background: linear-gradient(135deg, #818cf8 0%, #a78bfa 100%);
+    color: white;
+}
+
+html.dark .mobile-divider {
+    background: #334155;
+}
+
+html.dark .hamburger span {
+    background: #f1f5f9;
+}
+
+/* ─── Cards génériques ─── */
+html.dark .profile-main-card,
+html.dark .profile-edit-card,
+html.dark .profile-security-card,
+html.dark .profile-preferences-card,
+html.dark .profile-danger-card,
+html.dark .settings-card,
+html.dark .profile-stat-card {
+    background: #1e293b;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+html.dark .profile-stat-card.highlight {
+    background: linear-gradient(135deg, rgba(129, 140, 248, 0.15) 0%, rgba(167, 139, 250, 0.15) 100%);
+    border-color: #818cf8;
+}
+
+/* ─── Textes ─── */
+html.dark .profile-info-header h2,
+html.dark .profile-stat-card .stat-value,
+html.dark h1, html.dark h2, html.dark h3 {
+    color: #f1f5f9;
+}
+
+html.dark .profile-subtitle,
+html.dark .profile-email,
+html.dark .profile-bio,
+html.dark .meta-item,
+html.dark .stat-label,
+html.dark .settings-subtitle,
+html.dark .settings-item-desc,
+html.dark .settings-card-header p {
+    color: #94a3b8;
+}
+
+html.dark .settings-item-title,
+html.dark .settings-card-header h2 {
+    color: #f1f5f9;
+}
+
+/* ─── Settings items ─── */
+html.dark .settings-item:hover {
+    background: #263347;
+}
+
+html.dark .settings-card-header {
+    border-bottom-color: #334155;
+}
+
+html.dark .settings-item {
+    border-bottom-color: #263347;
+}
+
+/* ─── Boutons ─── */
+html.dark .btn-change-avatar,
+html.dark .btn-change-password,
+html.dark .btn-cancel,
+html.dark .btn-secondary {
+    background: #334155;
+    border-color: #475569;
+    color: #cbd5e1;
+}
+
+html.dark .btn-change-avatar:hover,
+html.dark .btn-change-password:hover,
+html.dark .btn-cancel:hover,
+html.dark .btn-secondary:hover {
+    background: #3d4f6a;
+    border-color: #818cf8;
+    color: #818cf8;
+}
+
+/* ─── Inputs ─── */
+html.dark .form-group input,
+html.dark .form-group textarea {
+    background: #0f172a;
+    border-color: #334155;
+    color: #f1f5f9;
+}
+
+html.dark .form-group input:focus,
+html.dark .form-group textarea:focus {
+    border-color: #818cf8;
+    box-shadow: 0 0 0 4px rgba(129, 140, 248, 0.15);
+}
+
+html.dark .form-group input::placeholder,
+html.dark .form-group textarea::placeholder {
+    color: #475569;
+}
+
+html.dark .form-group label {
+    color: #cbd5e1;
+}
+
+html.dark .input-error {
+    border-color: #f87171 !important;
+}
+
+/* ─── Préférences ─── */
+html.dark .preference-item {
+    background: #263347;
+}
+
+html.dark .preference-item:hover {
+    background: #2d3d52;
+}
+
+html.dark .preference-title {
+    color: #f1f5f9;
+}
+
+html.dark .preference-desc {
+    color: #94a3b8;
+}
+
+/* ─── Theme swatches ─── */
+html.dark .theme-swatch {
+    background: #334155;
+    border-color: #475569;
+    color: #cbd5e1;
+}
+
+html.dark .theme-swatch:hover {
+    border-color: var(--swatch-color);
+    background: #3d4f6a;
+}
+
+html.dark .theme-swatch.active {
+    background: #263347;
+}
+
+/* ─── Hint ─── */
+html.dark .settings-hint {
+    background: #2d2a1a;
+    border-color: #fbbf24;
+    color: #fbbf24;
+}
+
+/* ─── Modales ─── */
+html.dark .modal-overlay {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+html.dark .modal-content,
+html.dark .modal {
+    background: #1e293b;
+    border: 1px solid #334155;
+    color: #f1f5f9;
+}
+
+html.dark .modal-header,
+html.dark .modal-title {
+    color: #f1f5f9;
+    border-bottom-color: #334155;
+}
+
+html.dark .modal-close {
+    color: #94a3b8;
+}
+
+html.dark .modal-close:hover {
+    background: #334155;
+    color: #f1f5f9;
+}
+
+/* ─── Dashboard, HabitList, Stats (cartes génériques) ─── */
+html.dark .card,
+html.dark .dashboard-card,
+html.dark .habit-card,
+html.dark .stat-card,
+html.dark .badge-card,
+html.dark .quick-check-card {
+    background: #1e293b;
+    border-color: #334155;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+    color: #f1f5f9;
+}
+
+html.dark .card:hover,
+html.dark .habit-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* ─── Page backgrounds ─── */
+html.dark .app,
+html.dark .app-content,
+html.dark main {
+    background-color: #0f172a;
+}
+
+html.dark .profile-container,
+html.dark .settings-container {
+    background-color: #0f172a;
+}
+
+/* ─── Scrollbar ─── */
+html.dark ::-webkit-scrollbar {
+    width: 8px;
+}
+
+html.dark ::-webkit-scrollbar-track {
+    background: #1e293b;
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+    background: #475569;
+    border-radius: 4px;
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+    background: #64748b;
+}
+
+/* ─── Messages flash ─── */
+html.dark .profile-message.success,
+html.dark .settings-message.success {
+    background: #0d2818;
+    color: #34d399;
+    border-color: #34d399;
+}
+
+html.dark .profile-message.error,
+html.dark .settings-message.error {
+    background: #2d1515;
+    color: #f87171;
+    border-color: #f87171;
+}
+
+html.dark .settings-message.info {
+    background: #0c1f2d;
+    color: #60a5fa;
+    border-color: #60a5fa;
+}
+
+/* ─── Loading ─── */
+html.dark .loading-container p,
+html.dark .loading-screen p {
+    color: #94a3b8;
+}
+
+/* ─── Stat value color en dark ─── */
+html.dark .stat-value {
+    color: #818cf8;
+}
+
+/* ─── Danger card ─── */
+html.dark .settings-danger-card {
+    border-color: #f87171;
+}
+
+html.dark .settings-danger-card .settings-card-header h2 {
+    color: #f87171;
+}

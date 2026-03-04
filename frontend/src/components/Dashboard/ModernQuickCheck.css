@@ -594,3 +594,88 @@
 .empty-state-quick {
     transition: background 0.3s ease, box-shadow 0.3s ease;
 }
+
+/* ─── Timeline Toggle actif ─── */
+.timeline-toggle.active {
+    background: rgba(255, 255, 255, 0.35);
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+}
+
+/* ─── Timeline Panel (overlay) ─── */
+.timeline-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    z-index: 200;
+}
+
+.timeline-panel {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 24px 24px 0 0;
+    padding: 28px 24px 36px;
+    z-index: 201;
+    box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.2);
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.timeline-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.timeline-panel-header h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0;
+}
+
+.timeline-close {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #f5f5f5;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    transition: all 0.2s;
+    font-weight: 700;
+}
+
+.timeline-close:hover {
+    background: #e0e0e0;
+    color: #333;
+}
+
+/* Dark mode pour le panel */
+html.dark .timeline-panel {
+    background: #1e293b;
+    box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.5);
+}
+
+html.dark .timeline-panel-header h3 {
+    color: #f1f5f9;
+}
+
+html.dark .timeline-close {
+    background: #334155;
+    color: #94a3b8;
+}
+
+html.dark .timeline-close:hover {
+    background: #475569;
+    color: #f1f5f9;
+}

@@ -218,10 +218,11 @@ const ModernQuickCheck = () => {
                                 {soundEnabled ? '🔊' : '🔇'}
                             </motion.button>
                             <motion.button
-                                className="timeline-toggle"
+                                className={`timeline-toggle ${showTimeline ? 'active' : ''}`}
                                 onClick={() => setShowTimeline(!showTimeline)}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
+                                title="Voir la semaine"
                             >
                                 📅
                             </motion.button>
@@ -449,17 +450,38 @@ const ModernQuickCheck = () => {
                 )}
             </div>
 
-            {/* Timeline Widget */}
+            {/* Timeline Panel - overlay fixe */}
             <AnimatePresence>
                 {showTimeline && (
-                    <motion.div
-                        className="timeline-widget"
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                    >
-                        <WeekTimeline habits={habits} />
-                    </motion.div>
+                    <>
+                        {/* Backdrop */}
+                        <motion.div
+                            className="timeline-backdrop"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setShowTimeline(false)}
+                        />
+                        {/* Panel */}
+                        <motion.div
+                            className="timeline-panel"
+                            initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: 40, scale: 0.95 }}
+                            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                        >
+                            <div className="timeline-panel-header">
+                                <h3>📅 Cette semaine</h3>
+                                <button
+                                    className="timeline-close"
+                                    onClick={() => setShowTimeline(false)}
+                                >
+                                    ✕
+                                </button>
+                            </div>
+                            <WeekTimeline habits={habits} />
+                        </motion.div>
+                    </>
                 )}
             </AnimatePresence>
         </div>

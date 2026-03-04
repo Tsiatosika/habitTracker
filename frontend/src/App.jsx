@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { NotificationProvider } from './context/NotificationContext';
@@ -17,8 +17,6 @@ import HabitDetail from './components/Habits/HabitDetail';
 import Statistics from './components/Stats/Statistics';
 import BadgeList from './components/Badges/BadgeList';
 import ModernQuickCheck from './components/Dashboard/ModernQuickCheck';
-import Profile from './components/Profile/Profile';
-import Settings from './components/Profile/Settings';
 
 // Composants communs
 import Navbar from './components/common/Navbar';
@@ -40,6 +38,24 @@ const PrivateRoute = ({ children }) => {
     return user ? children : <Navigate to="/login" />;
 };
 
+// Composant pour gérer l'affichage conditionnel de la Navbar
+const AppLayout = ({ children }) => {
+    const location = useLocation();
+    const { user } = useContext(AuthContext);
+
+    // Ne pas afficher la Navbar sur les pages Login et Signup
+    const hideNavbar = location.pathname === '/login' || location.pathname === '/signup';
+
+    return (
+        <div className="app">
+            {!hideNavbar && user && <Navbar />}
+            <main className="app-content">
+                {children}
+            </main>
+        </div>
+    );
+};
+
 function App() {
     return (
         <ThemeProvider>
@@ -47,105 +63,86 @@ function App() {
                 <NotificationProvider>
                     <GamificationProvider>
                         <Router>
-                            <div className="app">
-                                <Navbar />
-                                <main className="app-content">
-                                    <Routes>
-                                        {/* Routes publiques */}
-                                        <Route path="/login" element={<Login />} />
-                                        <Route path="/signup" element={<Signup />} />
+                            <AppLayout>
+                                <Routes>
+                                    {/* Routes publiques */}
+                                    <Route path="/login" element={<Login />} />
+                                    <Route path="/signup" element={<Signup />} />
 
-                                        {/* Routes privées */}
-                                        <Route
-                                            path="/dashboard"
-                                            element={
-                                                <PrivateRoute>
-                                                    <Dashboard />
-                                                </PrivateRoute>
-                                            }
-                                        />
-                                        <Route
-                                            path="/quick-check"
-                                            element={
-                                                <PrivateRoute>
-                                                    <ModernQuickCheck />
-                                                </PrivateRoute>
-                                            }
-                                        />
-                                        <Route
-                                            path="/habits"
-                                            element={
-                                                <PrivateRoute>
-                                                    <HabitList />
-                                                </PrivateRoute>
-                                            }
-                                        />
-                                        <Route
-                                            path="/habits/:id"
-                                            element={
-                                                <PrivateRoute>
-                                                    <HabitDetail />
-                                                </PrivateRoute>
-                                            }
-                                        />
-                                        <Route
-                                            path="/statistics"
-                                            element={
-                                                <PrivateRoute>
-                                                    <Statistics />
-                                                </PrivateRoute>
-                                            }
-                                        />
-                                        <Route
-                                            path="/stats"
-                                            element={<Navigate to="/statistics" replace />}
-                                        />
-                                        <Route
-                                            path="/badges"
-                                            element={
-                                                <PrivateRoute>
-                                                    <BadgeList />
-                                                </PrivateRoute>
-                                            }
-                                        />
-                                        <Route
-                                            path="/profile"
-                                            element={
-                                                <PrivateRoute>
-                                                    <Profile />
-                                                </PrivateRoute>
-                                            }
-                                        />
-                                        <Route
-                                            path="/settings"
-                                            element={
-                                                <PrivateRoute>
-                                                    <Settings />
-                                                </PrivateRoute>
-                                            }
-                                        />
+                                    {/* Routes privées */}
+                                    <Route
+                                        path="/dashboard"
+                                        element={
+                                            <PrivateRoute>
+                                                <Dashboard />
+                                            </PrivateRoute>
+                                        }
+                                    />
+                                    <Route
+                                        path="/quick-check"
+                                        element={
+                                            <PrivateRoute>
+                                                <ModernQuickCheck />
+                                            </PrivateRoute>
+                                        }
+                                    />
+                                    <Route
+                                        path="/habits"
+                                        element={
+                                            <PrivateRoute>
+                                                <HabitList />
+                                            </PrivateRoute>
+                                        }
+                                    />
+                                    <Route
+                                        path="/habits/:id"
+                                        element={
+                                            <PrivateRoute>
+                                                <HabitDetail />
+                                            </PrivateRoute>
+                                        }
+                                    />
+                                    <Route
+                                        path="/statistics"
+                                        element={
+                                            <PrivateRoute>
+                                                <Statistics />
+                                            </PrivateRoute>
+                                        }
+                                    />
+                                    <Route
+                                        path="/stats"
+                                        element={<Navigate to="/statistics" replace />}
+                                    />
+                                    <Route
+                                        path="/badges"
+                                        element={
+                                            <PrivateRoute>
+                                                <BadgeList />
+                                            </PrivateRoute>
+                                        }
+                                    />
 
-                                        {/* Route par défaut */}
-                                        <Route path="/" element={<Navigate to="/dashboard" />} />
+                                    {/* Route par défaut */}
+                                    <Route path="/" element={<Navigate to="/dashboard" />} />
 
-                                        {/* Route 404 */}
-                                        <Route
-                                            path="*"
-                                            element={
-                                                <div className="error-404">
-                                                    <div className="error-content">
-                                                        <h1>404</h1>
-                                                        <p>Page non trouvée</p>
-                                                        <button onClick={() => window.location.href = '/dashboard'}>
-                                                            Retour au Dashboard
-                                                        </button>
-                                                    </div>
+                                    {/* Route 404 */}
+                                    <Route
+                                        path="*"
+                                        element={
+                                            <div className="error-404">
+                                                <div className="error-content">
+                                                    <h1>404</h1>
+                                                    <p>Page non trouvée</p>
+                                                    <button onClick={() => window.location.href = '/dashboard'}>
+                                                        Retour au Dashboard
+                                                    </button>
                                                 </div>
-                                            }
-                                        />
-                                    </Routes>
-                                </main>
-                            </div>
+                                            </div>
+                                        }
+                                    />
+                                </Routes>
+                            </AppLayout>
                         </Router>
                     </GamificationProvider>
                 </NotificationProvider>

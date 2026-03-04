@@ -26,6 +26,11 @@ const Navbar = () => {
 
     const isActive = (path) => location.pathname === path;
 
+    // Masquer la navbar sur les pages d'authentification
+    if (location.pathname === '/login' || location.pathname === '/signup') {
+        return null;
+    }
+
     return (
         <nav className="navbar">
             <div className="navbar-container">

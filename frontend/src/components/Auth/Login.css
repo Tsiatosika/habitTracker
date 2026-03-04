@@ -218,3 +218,66 @@
         font-size: 16px;
     }
 }
+
+/* ══════════════════════════════════════════════════════════
+   DARK MODE — Login
+══════════════════════════════════════════════════════════ */
+
+html.dark .login-container {
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #1e1b4b 100%);
+}
+
+html.dark .login-box {
+    background: #1e293b;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+html.dark .login-box h2 {
+    color: #f1f5f9;
+}
+
+html.dark .subtitle {
+    color: #94a3b8;
+}
+
+html.dark .form-group label {
+    color: #cbd5e1;
+}
+
+html.dark .form-group input {
+    background: #0f172a;
+    border-color: #334155;
+    color: #f1f5f9;
+}
+
+html.dark .form-group input:focus {
+    border-color: #818cf8;
+    box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.15);
+}
+
+html.dark .form-group input::placeholder {
+    color: #475569;
+}
+
+html.dark .error-message {
+    background: #2d1515;
+    color: #f87171;
+    border: 1px solid #f87171;
+}
+
+html.dark .signup-link {
+    color: #94a3b8;
+}
+
+html.dark .signup-link a {
+    color: #818cf8;
+}
+
+html.dark .feature-item {
+    background: rgba(129, 140, 248, 0.1);
+    border: 1px solid rgba(129, 140, 248, 0.2);
+}
+
+html.dark .feature-item:hover {
+    background: rgba(129, 140, 248, 0.18);
+}

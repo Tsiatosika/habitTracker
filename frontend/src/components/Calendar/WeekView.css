@@ -284,3 +284,104 @@
         text-align: left;
     }
 }
+
+/* ══════════════════════════════════════════════════════════
+   DARK MODE — WeekView
+══════════════════════════════════════════════════════════ */
+
+/* ─── Boutons navigation ─── */
+html.dark .btn-nav {
+    background: #1e293b;
+    color: #94a3b8;
+    border: 1px solid #334155;
+}
+
+html.dark .btn-nav:hover {
+    background: #263347;
+    color: #818cf8;
+    border-color: #818cf8;
+}
+
+/* ─── Barre de stats (fond blanc → sombre) ─── */
+html.dark .week-stats {
+    background: #1e293b;
+    border: 1px solid #334155;
+}
+
+html.dark .completion-number {
+    color: #818cf8;
+}
+
+html.dark .completion-label {
+    color: #64748b;
+}
+
+html.dark .week-progress-bar {
+    background: #334155;
+}
+
+html.dark .completion-percentage {
+    color: #818cf8;
+}
+
+/* ─── Cartes des jours ─── */
+html.dark .day-card {
+    background: #1e293b;
+    border-color: #334155;
+}
+
+html.dark .day-card:hover:not(.future) {
+    background: #263347;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+html.dark .day-card.completed {
+    background: linear-gradient(135deg, rgba(129, 140, 248, 0.12) 0%, rgba(167, 139, 250, 0.12) 100%);
+}
+
+html.dark .day-card.today {
+    border-color: #818cf8;
+    box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.25);
+}
+
+html.dark .day-card.future {
+    background: #161f2e;
+    border-color: #263347;
+    opacity: 0.45;
+}
+
+/* ─── Textes des cartes ─── */
+html.dark .day-name {
+    color: #64748b;
+}
+
+html.dark .day-number {
+    color: #f1f5f9;
+}
+
+html.dark .day-card.today .day-name {
+    color: #818cf8;
+}
+
+html.dark .day-card.today .day-number {
+    color: #818cf8;
+}
+
+/* ─── Icônes ─── */
+html.dark .empty-icon {
+    color: #475569;
+}
+
+html.dark .check-icon {
+    color: #34d399;
+}
+
+/* ─── Footer ─── */
+html.dark .week-footer {
+    background: #1e293b;
+    border: 1px solid #334155;
+}
+
+html.dark .week-date-range {
+    color: #64748b;
+}

@@ -303,3 +303,106 @@
         font-size: 11px;
     }
 }
+
+/* ══════════════════════════════════════════════════════════
+   DARK MODE — Heatmap
+══════════════════════════════════════════════════════════ */
+
+/* ─── Navigation ─── */
+html.dark .btn-nav {
+    background: #1e293b;
+    color: #94a3b8;
+    border: 1px solid #334155;
+}
+
+html.dark .btn-nav:hover {
+    background: #263347;
+    color: #818cf8;
+    border-color: #818cf8;
+}
+
+/* ─── Stat cards ─── */
+html.dark .heatmap-stat-card {
+    background: #1e293b;
+    border: 1px solid #334155;
+}
+
+html.dark .heatmap-stat-card .stat-value {
+    color: #818cf8;
+}
+
+html.dark .heatmap-stat-card .stat-label {
+    color: #64748b;
+}
+
+/* ─── Conteneur principal heatmap ─── */
+html.dark .heatmap-container {
+    background: #1e293b;
+    border: 1px solid #334155;
+}
+
+/* ─── Labels mois et jours ─── */
+html.dark .month-label {
+    color: #64748b;
+}
+
+html.dark .weekday-label {
+    color: #64748b;
+}
+
+/* ─── Cellules heatmap ─── */
+html.dark .heatmap-day {
+    background: #263347;
+}
+
+html.dark .heatmap-day.empty {
+    background: transparent;
+}
+
+html.dark .heatmap-day:not(.empty):not(.future):hover {
+    border-color: #818cf8;
+}
+
+html.dark .heatmap-day.today {
+    border-color: #818cf8;
+    box-shadow: 0 0 0 2px #1e293b, 0 0 0 4px #818cf8;
+}
+
+html.dark .heatmap-day.future {
+    background: #1a2438;
+    opacity: 0.2;
+}
+
+/* ─── Légende ─── */
+html.dark .heatmap-legend {
+    border-top-color: #334155;
+}
+
+html.dark .legend-label {
+    color: #64748b;
+}
+
+html.dark .legend-square.empty {
+    background: #263347;
+}
+
+/* ─── Tooltip ─── */
+html.dark .heatmap-tooltip {
+    background: #0f172a;
+    border: 1px solid #334155;
+    color: #f1f5f9;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* ─── Scrollbar ─── */
+html.dark .heatmap-grid::-webkit-scrollbar-track {
+    background: #1e293b;
+}
+
+html.dark .heatmap-grid::-webkit-scrollbar-thumb {
+    background: #475569;
+}
+
+html.dark .heatmap-grid::-webkit-scrollbar-thumb:hover {
+    background: #64748b;
+}

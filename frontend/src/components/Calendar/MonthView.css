@@ -275,3 +275,82 @@
         padding: 4px;
     }
 }
+
+/* ══════════════════════════════════════════════════════════
+   DARK MODE — MonthView
+══════════════════════════════════════════════════════════ */
+
+/* ─── Navigation ─── */
+html.dark .btn-nav {
+    background: #1e293b;
+    color: #94a3b8;
+    border: 1px solid #334155;
+}
+
+html.dark .btn-nav:hover {
+    background: #263347;
+    color: #818cf8;
+    border-color: #818cf8;
+}
+
+/* ─── Titre du mois ─── */
+html.dark .month-title {
+    color: #f1f5f9;
+}
+
+/* ─── Barre de stats ─── */
+html.dark .month-stats {
+    background: #1e293b;
+    border: 1px solid #334155;
+}
+
+html.dark .completion-number {
+    color: #818cf8;
+}
+
+html.dark .completion-label {
+    color: #64748b;
+}
+
+html.dark .month-progress-bar {
+    background: #334155;
+}
+
+html.dark .completion-percentage {
+    color: #818cf8;
+}
+
+/* ─── En-têtes des jours ─── */
+html.dark .weekday-header {
+    color: #64748b;
+}
+
+/* ─── Cellules du calendrier ─── */
+html.dark .calendar-day {
+    background: #1e293b;
+    border-color: #334155;
+}
+
+html.dark .calendar-day:not(.empty):not(.future):hover {
+    background: #263347;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+html.dark .calendar-day.today {
+    box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.3);
+    border-color: #818cf8;
+}
+
+html.dark .calendar-day.future {
+    background: #161f2e;
+    border-color: #263347;
+    opacity: 0.3;
+}
+
+html.dark .day-number {
+    color: #f1f5f9;
+}
+
+html.dark .calendar-day.future .day-number {
+    color: #475569;
+}

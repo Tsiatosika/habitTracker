@@ -1,4 +1,5 @@
-    const pool = require('../config/database');
+const pool = require('../config/database');
+const { checkFirstHabitBadge } = require('../utils/badgeChecker');
 
 // Créer une habitude
 const createHabit = async (req, res) => {
@@ -7,13 +8,18 @@ const createHabit = async (req, res) => {
         const userId = req.user.userId;
 
         const result = await pool.query(
-            `INSERT INTO habits (user_id, name, description, color, icon, frequency, target_days) 
-             VALUES ($1, $2, $3, $4, $5, $6, $7) 
+            `INSERT INTO habits (user_id, name, description, color, icon, frequency, target_days)
+             VALUES ($1, $2, $3, $4, $5, $6, $7)
              RETURNING *`,
             [userId, name, description, color, icon, frequency || 'daily', target_days || 7]
         );
 
-        res.status(201).json(result.rows[0]);
+        const habit = result.rows[0];
+
+        // Vérifier le badge "Premier pas" (première habitude créée)
+        await checkFirstHabitBadge(userId);
+
+        res.status(201).json(habit);
     } catch (error) {
         console.error('Create habit error:', error);
         res.status(500).json({ error: 'Server error' });

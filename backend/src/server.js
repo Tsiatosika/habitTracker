@@ -6,6 +6,7 @@ const authRoutes = require('./routes/auth.routes');
 const habitRoutes = require('./routes/habits.routes');
 const checkRoutes = require('./routes/checks.routes');
 const statsRoutes = require('./routes/stats.routes');
+const badgeRoutes = require('./routes/badges.routes');
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/habits', habitRoutes);
 app.use('/api/checks', checkRoutes);
 app.use('/api/stats', statsRoutes);
+app.use('/api/badges', badgeRoutes);
 
 // Error handler
 app.use((err, req, res, next) => {

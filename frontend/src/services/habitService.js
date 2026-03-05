@@ -56,4 +56,10 @@ export const habitService = {
         const response = await api.get('/stats/overall');
         return response.data;
     },
+
+    // Récupérer les badges de l'utilisateur
+    getBadges: async () => {
+        const response = await api.get('/badges');
+        return response.data;
+    },
 };

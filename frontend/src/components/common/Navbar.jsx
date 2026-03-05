@@ -26,10 +26,16 @@ const Navbar = () => {
 
     const isActive = (path) => location.pathname === path;
 
-    // Masquer la navbar sur les pages d'authentification
-    if (location.pathname === '/login' || location.pathname === '/signup') {
-        return null;
-    }
+    // Fonction pour obtenir l'avatar ou la première lettre
+    const getAvatarDisplay = () => {
+        if (user?.avatar) {
+            return user.avatar;
+        }
+        if (user?.username) {
+            return user.username.charAt(0).toUpperCase();
+        }
+        return '👤';
+    };
 
     return (
         <nav className="navbar">
@@ -60,7 +66,7 @@ const Navbar = () => {
                         onClick={() => setShowUserMenu(!showUserMenu)}
                     >
                         <div className="user-avatar">
-                            {user?.username?.charAt(0).toUpperCase() || '👤'}
+                            {getAvatarDisplay()}
                         </div>
                         <span className="user-name">{user?.username || 'Utilisateur'}</span>
                         <span className="dropdown-arrow">▼</span>
@@ -71,7 +77,7 @@ const Navbar = () => {
                             <div className="dropdown-header">
                                 <div className="user-info">
                                     <div className="user-avatar-large">
-                                        {user?.username?.charAt(0).toUpperCase() || '👤'}
+                                        {getAvatarDisplay()}
                                     </div>
                                     <div className="user-details">
                                         <div className="user-name-large">{user?.username}</div>

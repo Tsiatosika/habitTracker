@@ -1,5 +1,5 @@
 const Badge = require('../models/Badge');
-const HabitCheck = require('../models/HabitCheck');
+const pool = require('../config/database');
 const { calculateStreak } = require('./calculateStreak');
 
 // Types de badges disponibles
@@ -37,8 +37,12 @@ const checkAndAwardBadges = async (userId, habitId) => {
     try {
         const newBadges = [];
 
-        // Récupérer tous les checks de cette habitude
-        const checks = await HabitCheck.findByHabit(habitId);
+        // Récupérer tous les checks complétés de cette habitude via pool
+        const result = await pool.query(
+            'SELECT * FROM habit_checks WHERE habit_id = $1 AND completed = TRUE ORDER BY check_date DESC',
+            [habitId]
+        );
+        const checks = result.rows;
 
         // Calculer le streak actuel
         const currentStreak = calculateStreak(checks);

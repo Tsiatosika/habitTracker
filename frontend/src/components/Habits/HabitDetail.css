@@ -245,3 +245,224 @@
   .view-selector { width: 100%; }
   .view-selector button { flex: 1; }
 }
+
+/* ══════════════════════════════════════════════════════════
+   DARK MODE — HabitDetail
+══════════════════════════════════════════════════════════ */
+
+/* ─── Conteneur principal ─── */
+html.dark .habit-detail-container {
+    background-color: #0f172a;
+}
+
+/* ─── Bouton retour ─── */
+html.dark .btn-back {
+    background: #1e293b;
+    border-color: #334155;
+    color: #94a3b8;
+}
+
+html.dark .btn-back:hover {
+    background: #263347;
+    border-color: #818cf8;
+    color: #818cf8;
+}
+
+/* ─── Header ─── */
+html.dark .habit-detail-header {
+    background: #1e293b;
+    border-color: #334155;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+}
+
+html.dark .habit-detail-header h1 {
+    color: #f1f5f9;
+}
+
+html.dark .habit-desc {
+    color: #94a3b8;
+}
+
+/* ─── Stat cards ─── */
+html.dark .stat-card {
+    background: #1e293b;
+    border-color: #334155;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+html.dark .stat-card:hover {
+    border-color: #475569;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+
+html.dark .stat-value {
+    color: #f1f5f9;
+}
+
+html.dark .stat-label {
+    color: #64748b;
+}
+
+/* ─── View selector ─── */
+html.dark .view-selector {
+    background: #1e293b;
+    border-color: #334155;
+}
+
+html.dark .view-selector button {
+    color: #64748b;
+}
+
+html.dark .view-selector button:hover:not(.active) {
+    background: #263347;
+    color: #cbd5e1;
+}
+
+html.dark .view-selector button.active {
+    background: linear-gradient(135deg, #818cf8 0%, #a78bfa 100%);
+    color: white;
+}
+
+/* ─── Calendar container ─── */
+html.dark .calendar-container {
+    background: #1e293b;
+    border-color: #334155;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+}
+
+/* ─── WeekView — navigation buttons ─── */
+html.dark .week-nav-btn,
+html.dark .btn-prev-week,
+html.dark .btn-next-week,
+html.dark .btn-today,
+html.dark [class*="week-nav"],
+html.dark [class*="nav-btn"] {
+    background: #1e293b;
+    border-color: #334155;
+    color: #94a3b8;
+}
+
+html.dark .week-nav-btn:hover,
+html.dark .btn-prev-week:hover,
+html.dark .btn-next-week:hover {
+    background: #263347;
+    border-color: #818cf8;
+    color: #818cf8;
+}
+
+/* ─── WeekView — progress bar ─── */
+html.dark .week-progress-card,
+html.dark .week-summary,
+html.dark [class*="progress-card"],
+html.dark [class*="week-summary"] {
+    background: #1e293b;
+    border-color: #334155;
+    color: #f1f5f9;
+}
+
+html.dark .progress-bar-bg,
+html.dark [class*="progress-track"],
+html.dark [class*="progress-bg"] {
+    background: #334155;
+}
+
+html.dark .days-count,
+html.dark .completion-rate,
+html.dark [class*="days-label"] {
+    color: #94a3b8;
+}
+
+/* ─── WeekView — day cards (blanches sur capture) ─── */
+html.dark .day-card,
+html.dark .week-day-card,
+html.dark [class*="day-card"] {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+    color: #f1f5f9 !important;
+}
+
+html.dark .day-card.today,
+html.dark .week-day-card.today,
+html.dark [class*="day-card"].today {
+    background: #1e293b !important;
+    border-color: #818cf8 !important;
+    box-shadow: 0 0 0 2px rgba(129,140,248,0.3) !important;
+}
+
+/* Jours futurs grisés */
+html.dark .day-card.future,
+html.dark .day-card.locked,
+html.dark [class*="day-card"].future,
+html.dark [class*="day-card"].locked {
+    background: #16213a !important;
+    border-color: #263347 !important;
+    opacity: 0.6;
+}
+
+html.dark .day-name,
+html.dark .day-number,
+html.dark [class*="day-name"],
+html.dark [class*="day-num"] {
+    color: #94a3b8;
+}
+
+html.dark .day-card.today .day-name,
+html.dark .day-card.today .day-number,
+html.dark [class*="day-card"].today [class*="day-name"],
+html.dark [class*="day-card"].today [class*="day-num"] {
+    color: #818cf8;
+}
+
+/* ─── Check circle ─── */
+html.dark .check-circle,
+html.dark [class*="check-circle"] {
+    border-color: #475569 !important;
+    background: transparent;
+}
+
+html.dark .check-circle.checked,
+html.dark [class*="check-circle"].checked {
+    background: #34d399 !important;
+    border-color: #34d399 !important;
+}
+
+/* ─── Week range footer ─── */
+html.dark .week-range,
+html.dark [class*="week-range"],
+html.dark [class*="date-range"] {
+    background: #1e293b;
+    border-color: #334155;
+    color: #64748b;
+}
+
+/* ─── MonthView ─── */
+html.dark .month-day,
+html.dark [class*="month-day"],
+html.dark [class*="cal-day"] {
+    background: #1e293b;
+    border-color: #334155;
+    color: #f1f5f9;
+}
+
+html.dark .month-day-header,
+html.dark [class*="weekday-header"],
+html.dark [class*="day-header"] {
+    color: #64748b;
+}
+
+/* ─── Heatmap ─── */
+html.dark .heatmap-cell,
+html.dark [class*="heatmap-cell"] {
+    background: #263347;
+}
+
+html.dark .heatmap-label,
+html.dark [class*="heatmap-label"] {
+    color: #64748b;
+}
+
+/* ─── Loading ─── */
+html.dark .loading {
+    color: #64748b;
+    background-color: #0f172a;
+}

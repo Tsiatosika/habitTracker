@@ -1,4 +1,5 @@
 const pool = require('../config/database');
+const { checkAndAwardBadges } = require('../utils/badgeChecker');
 
 // Créer ou toggle un check
 const toggleCheck = async (req, res) => {
@@ -27,25 +28,32 @@ const toggleCheck = async (req, res) => {
         if (existingCheck.rows.length > 0) {
             // Update existing check
             result = await pool.query(
-                `UPDATE habit_checks 
-                 SET completed = $1, notes = $2 
-                 WHERE habit_id = $3 AND check_date = $4 
+                `UPDATE habit_checks
+                 SET completed = $1, notes = $2
+                 WHERE habit_id = $3 AND check_date = $4
                  RETURNING *`,
                 [completed, notes, habit_id, check_date]
             );
         } else {
             // Create new check
             result = await pool.query(
-                `INSERT INTO habit_checks (habit_id, check_date, completed, notes) 
-                 VALUES ($1, $2, $3, $4) 
+                `INSERT INTO habit_checks (habit_id, check_date, completed, notes)
+                 VALUES ($1, $2, $3, $4)
                  RETURNING *`,
                 [habit_id, check_date, completed, notes]
             );
         }
 
-        res.json(result.rows[0]);
+        const check = result.rows[0];
+
+        // Vérifier et attribuer les badges si le check est complété
+        let newBadges = [];
+        if (completed) {
+            newBadges = await checkAndAwardBadges(userId, habit_id);
+        }
+
+        res.json({ ...check, newBadges });
     } catch (error) {
-        console.error('Toggle check error:', error);
         res.status(500).json({ error: 'Server error' });
     }
 };
